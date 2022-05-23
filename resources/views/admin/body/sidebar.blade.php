@@ -69,7 +69,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="{{ ($route == 'add-product') ? 'active':'' }}"><a href="{{ route('add-product')}}"><i class="ti-more"></i>Add Products</a></li>
+            <li class="{{ ($route == 'add.product') ? 'active':'' }}"><a href="{{ route('add.product')}}"><i class="ti-more"></i>Add Products</a></li>
             <li><a href="invoice.html"><i class="ti-more"></i>Mange Products</a></li>
           </ul>
         </li>
