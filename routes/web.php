@@ -161,6 +161,12 @@ Route::get('/language/english', [LanguageController::class, 'English'])->name('e
 
 
 
+// Product Details Page Url
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
+
+
+
+
 // User All Route
 
 Route::get('/user/logout', [IndexController::class, 'UserLogout'])->name('user.logout');
