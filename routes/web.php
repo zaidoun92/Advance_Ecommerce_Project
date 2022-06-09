@@ -180,6 +180,8 @@ Route::get('/product/view/model/{id}', [IndexController::class, 'ProductViewAjax
 // Product View Model With Ajax in Card
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 
+// Get data for mini cart
+Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);
 
 
 // User All Route
