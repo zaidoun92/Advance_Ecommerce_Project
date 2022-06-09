@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Models\User;
@@ -164,6 +165,20 @@ Route::get('/language/english', [LanguageController::class, 'English'])->name('e
 // Product Details Page Url
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
 
+// frontend product tag page
+Route::get('/product/tag/{tag}', [IndexController::class, 'TagWiseProduct']);
+
+// FrontEnd SubCategory Wise Data
+Route::get('/subcategory/product/{subcat_id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
+
+// FrontEnd SubSubCategory Wise Data
+Route::get('/subsubcategory/product/{subsubcat_id}/{slug}', [IndexController::class, 'SubSubCatWiseProduct']);
+
+// Product View Model With Ajax in Card
+Route::get('/product/view/model/{id}', [IndexController::class, 'ProductViewAjax']);
+
+// Product View Model With Ajax in Card
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 
 
 

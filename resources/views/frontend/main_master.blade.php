@@ -5,6 +5,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="description" content="">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <meta name="author" content="">
 <meta name="keywords" content="MediaCenter, Template, eCommerce">
 <meta name="robots" content="all">
@@ -70,7 +72,7 @@
 <script src="{{ asset('frontend/assets/js/wow.min.js')}}"></script>
 <script src="{{ asset('frontend/assets/js/scripts.js')}}"></script>
 
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
@@ -92,6 +94,225 @@
             break;
         }
         @endif
+    </script>
+
+
+
+
+    <!--Ster Add to Cart Product Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"><strong><span id="pname"></span></strong></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModel">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img src="" class="card-img-top" alt="..." style="height: 200px; width: 200px;" id="pimage">
+
+                        </div>
+                    </div>{{-- // End col-md-4 --}}
+
+
+                    <div class="col-md-4">
+                        <ul class="list-group">
+                            <li class="list-group-item">Product Price: <strong class="text-danger">
+                                $<span id="pprice"></span></strong>
+                                <del id="oldprice">$</del>
+                            </li>
+                            <li class="list-group-item">Product Code: <strong id="pcode"></strong></li>
+                            <li class="list-group-item">Category: <strong id="pcategory"></strong></li>
+                            <li class="list-group-item">Brand: <strong id="pbrand"></strong></li>
+                            <li class="list-group-item">Stock:
+                                <span class="badge badge-pill badge-success" id="aviable" style="background: green; color: white"></span>
+                                <span class="badge badge-pill badge-danger" id="stockout" style="background: red; color: white"></span>
+                                </li>
+                          </ul>
+                    </div>{{-- // End col-md-4 --}}
+
+
+                    <div class="col-md-4">
+
+                        <div class="form-group">
+                            <label for="color">Choose Color</label>
+                            <select class="form-control" id="color" name="color">
+
+                            </select>
+                        </div> {{-- // End Form Group --}}
+
+                        <div class="form-group" id="sizeArea">
+                            <label for="size">Choose Size</label>
+                            <select class="form-control" id="size" name="size">
+
+                            </select>
+                        </div> {{-- // End Form Group --}}
+
+                        <div class="form-group" id="colorArea">
+                            <label for="qty">quantity</label>
+                            <input type="number" class="form-control" id="qty" value="1" min="1">
+                          </div> {{-- // End Form Group --}}
+
+                          <input type="hidden" id="product_id">
+                          <button type="submit" class="btn btn-primary mb-2" onclick="addToCart()">Add to Cart</button>
+
+
+                    </div>{{-- // End col-md-4 --}}
+
+                </div> {{-- // end row --}}
+            </div>{{-- //// end Model Body --}}
+        </div>
+        </div>
+    </div>
+    <!--End Add to Cart Product Modal -->
+
+
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers:{
+                'X_CSRF_TOKEN':$('meta[name="csrf-token"]').attr('content')
+            }
+        })
+
+        // Start Product View With Model
+        function productView(id) {
+            // alert(id)
+            $.ajax({
+                type: 'GET',
+                url: '/product/view/model/'+id,
+                dataType:'json',
+                success:function(data){
+                    $('#pname').text(data.product.product_name_en);
+                    $('#price').text(data.product.selling_price);
+                    $('#pcode').text(data.product.product_code);
+                    $('#pcategory').text(data.product.category.category_name_en);
+                    $('#pbrand').text(data.product.brand.brand_name_en);
+                    $('#pimage').attr('src','/'+data.product.product_thambnail);
+
+                    $('#product_id').val(id);
+                    $('#qty').val(1);
+
+
+
+
+                    // Start Product Price
+                    if(data.product.discount_price == null) {
+                        $('#pprice').text('');
+                        $('#oldprice').text('');
+                        $('#pprice').text(data.product.selling_price);
+                    }
+                    else {
+                        $('#pprice').text(data.product.discount_price);
+                        $('#oldprice').text(data.product.selling_price);
+                    }
+                    // End Product Price
+
+
+
+                    // Product Stock Option
+                    if (data.product.product_qty > 0) {
+                        $('#stockout').text('');
+                        $('#aviable').text('');
+
+                        $('#aviable').text('aviable');
+                    } else {
+                        $('#stockout').text('');
+                        $('#aviable').text('');
+
+                        $('#stockout').text('stockout');
+                    }
+                    //End Product Stock Option
+
+
+                    // Color
+                    $('select[name="color"]').empty();
+                    $.each(data.color,function(key,value){
+                        $('select[name="color"]').append('<option value=" '+value+' ">'+value+'</option>')
+
+                        if (data.color == "") {
+                            $('#colorArea').hide();
+                        } else {
+                            $('#colorArea').show();
+                        }
+                    })
+
+
+                    //Size
+                    $('select[name="size"]').empty();
+                    $.each(data.size,function(key,value){
+                        $('select[name="size"]').append('<option value=" '+value+' ">'+value+'</option>')
+
+                        if (data.size == "") {
+                            $('#sizeArea').hide();
+                        } else {
+                            $('#sizeArea').show();
+                        }
+                    })
+
+
+                }
+            })
+        }
+        // End Product View With Model
+
+
+
+
+
+
+
+        // Start Add To Cart Product
+        function addToCart() {
+            var product_name = $('#pname').text();
+            var id = $('#product_id').val();
+            var color = $('#color option:selected').text();
+            var size = $('#size option:selected').text();
+            var quantity = $('#qty').val();
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                data:{
+                    color:color, size:size, quantity:quantity, product_name:product_name
+                },
+                url: '/cart/data/store/'+id,
+                success: function(data){
+                    $('#closeModel').click();
+                    // console.log(data)
+
+                    // start Message
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                        })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    // End Message
+                }
+            })
+        }
+        // End Add To Cart Product
+
+
+
     </script>
 </body>
 </html>
