@@ -47,7 +47,7 @@
 
                                     <td width="25%">
                                         <a href="{{ route('coupon.edit',$item->id) }}" class="btn btn-info" title="Edit Data"><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ route('category.delete',$item->id) }}" class="btn btn-danger" id="delete" title="Delete Data"><i class="fa fa-trash"></i></a>
+                                        <a href="{{ route('coupon.delete',$item->id) }}" class="btn btn-danger" id="delete" title="Delete Data"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
