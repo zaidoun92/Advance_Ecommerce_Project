@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -152,6 +153,10 @@ Route::prefix('slider')->group(function() {
 
 
 
+
+
+
+
 });
 
 
@@ -225,6 +230,17 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth','user'],'namespace' =>
 
 
 
+
+
+
+
+
+// All Admin Coupon Routs
+Route::prefix('coupons')->group(function() {
+    Route::get('/view', [CouponController::class, 'CouponView'])->name('manage.coupon');
+    Route::post('/store', [CouponController::class, 'CouponStore'])->name('coupon.store');
+    Route::get('/edit/{id}', [CouponController::class, 'CouponEdit'])->name('coupon.edit');
+});
 
 
 
