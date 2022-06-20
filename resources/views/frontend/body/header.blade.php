@@ -15,7 +15,7 @@
               <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>
                 @if (session()->get('language') == 'arabic') عربة التسوق الخاصة بي @else My Cart @endif
                 </a></li>
-              <li><a href="#"><i class="icon fa fa-check"></i>
+              <li><a href="{{ route('checkout') }}"><i class="icon fa fa-check"></i>
                 @if (session()->get('language') == 'arabic') الدفع @else Checkout @endif
                 </a></li>
 

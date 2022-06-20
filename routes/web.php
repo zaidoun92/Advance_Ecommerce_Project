@@ -13,6 +13,8 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\WishlistController;
 use App\Models\User;
 use GuzzleHttp\Middleware;
@@ -211,6 +213,10 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth','user'],'namespace' =>
         // Wishlist Page Load
         Route::get('/wishlist-remove/{id}', [WishlistController::class, 'RemoveWishlistProduct']);
 
+
+        // Stripe Payment Order
+        Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+
     });
 
 
@@ -262,7 +268,40 @@ Route::prefix('shipping')->group(function() {
 
     // All Routs For District
     Route::get('/district/view', [ShippingAreaController::class, 'DistrictView'])->name('manage.district');
+    Route::post('/district/store', [ShippingAreaController::class, 'DistrictStore'])->name('district.store');
+    Route::get('/district/edit/{id}', [ShippingAreaController::class, 'DistrictEdit'])->name('district.edit');
+    Route::post('/district/update/{id}', [ShippingAreaController::class, 'DistrictUpdate'])->name('district.update');
+    Route::get('/district/delete/{id}', [ShippingAreaController::class, 'DistrictDelete'])->name('district.delete');
+
+
+    // All Routs For State
+    Route::get('/state/view', [ShippingAreaController::class, 'StateView'])->name('manage.state');
+    Route::post('/state/store', [ShippingAreaController::class, 'StateStore'])->name('state.store');
+    Route::get('/state/edit/{id}', [ShippingAreaController::class, 'StateEdit'])->name('state.edit');
+    Route::post('/state/update/{id}', [ShippingAreaController::class, 'StateUpdate'])->name('state.update');
+    Route::get('/state/delete/{id}', [ShippingAreaController::class, 'StateDelete'])->name('state.delete');
+    // Route::get('/district/ajax/{division_id}', [ShippingAreaController::class, 'GetSubDistrict']);
+
 });
+
+
+
+
+
+
+
+// Frontend Coupon Option
+Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
+Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
+Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
+
+
+// Checkout Route
+Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
+Route::get('/district-get/ajax/{division_id}', [CheckoutController::class, 'DistrictGetAjax']);
+Route::get('/state-get/ajax/{district_id}', [CheckoutController::class, 'StateGetAjax']);
+Route::post('/checkout/store', [CheckoutController::class, 'CheckoutStore'])->name('checkout.store');
+
 
 
 
