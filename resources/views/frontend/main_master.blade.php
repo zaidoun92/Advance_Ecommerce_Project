@@ -701,7 +701,9 @@
                 success: function(data) {
 
                     CouponCalculation();
-                    $('#couponField').hide();
+                    if (data.validity == true) {
+                        $('#couponField').hide();
+                    }
 
                     // start Message
                     const Toast = Swal.mixin({

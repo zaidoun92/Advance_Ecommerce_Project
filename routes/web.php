@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
+use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
@@ -216,6 +217,12 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth','user'],'namespace' =>
 
         // Stripe Payment Order
         Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+
+
+        Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
+
+
+        Route::get('/order_details/{order_id}', [AllUserController::class, 'OrderDetails']);
 
     });
 
