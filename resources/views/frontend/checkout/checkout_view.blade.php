@@ -49,7 +49,7 @@ My Checkout
                                         <!-- guest-login -->
                                         <div class="col-md-6 col-sm-6 already-registered-login">
                                             <h4 class="checkout-subtitle"><b>Shipping Addres</b></h4>
-                                            <form class="register-form" action="{{ route('checkout.store')}}" method="POST"> @csrf
+                    <form class="register-form" action="{{ route('checkout.store')}}" method="POST"> @csrf
 
 
                                                 <div class="form-group">
@@ -148,61 +148,61 @@ My Checkout
                         <!-- checkout-step-01  -->
 
 
-					</div><!-- /.checkout-steps -->
-				</div>
-                        <div class="col-md-4">
-                            <!-- checkout-progress-sidebar -->
-                            <div class="checkout-progress-sidebar ">
-                                <div class="panel-group">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="unicase-checkout-title">Your Checkout Progress</h4>
-                                        </div>
-                                        <div class="">
-                                            <ul class="nav nav-checkout-progress list-unstyled">
-
-
-
-                                                @foreach ($carts as $item)
-                                                    <li>
-                                                        <strong>Image: </strong>
-                                                        <img src="{{ asset($item->options->image) }}" style="height: 50px; width: 50px;" alt="">
-                                                    </li>
-                                                    <li>
-                                                        <strong>Qty: </strong>
-                                                        ({{ $item->qty}})
-                                                        <strong>Color: </strong>
-                                                        {{ $item->options->color}}
-                                                        <strong>Size: </strong>
-                                                        {{ $item->options->size}}
-                                                    </li>
-                                                @endforeach
-
-                                                <hr>
-
-                                                <li>
-                                                    @if ( Session::has('coupon'))
-                                                        <strong>SubTotal: </strong> ${{ $cartTotal }} <hr>
-                                                        <strong>Copon Name: </strong> {{ session()->get('coupon')['coupon_name'] }}
-                                                        ( {{ session()->get('coupon')['coupon_discount'] }} %)
-                                                        <hr>
-                                                        <strong>Discount Amount : </strong> ${{ session()->get('coupon')['discount_amount'] }}
-                                                        <hr>
-                                                        <strong>GrandTotal : </strong> ${{ session()->get('coupon')['total_amount'] }}
-                                                        <hr>
-                                                    @else
-                                                        <strong>SubTotal : </strong> ${{ $cartTotal }} <hr>
-                                                        <strong>GrandTotal : </strong> ${{ $cartTotal }} <hr>
-                                                    @endif
-
-                                                </li>
-                                            </ul>
-                                        </div>
+                                </div><!-- /.checkout-steps -->
                                     </div>
+                                        <div class="col-md-4">
+                                            <!-- checkout-progress-sidebar -->
+                                            <div class="checkout-progress-sidebar ">
+                                                <div class="panel-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h4 class="unicase-checkout-title">Your Checkout Progress</h4>
+                                                        </div>
+                                                        <div class="">
+                                                            <ul class="nav nav-checkout-progress list-unstyled">
+
+
+
+                                                                @foreach ($carts as $item)
+                                                                    <li>
+                                                                        <strong>Image: </strong>
+                                                                        <img src="{{ asset($item->options->image) }}" style="height: 50px; width: 50px;" alt="">
+                                                                    </li>
+                                                                    <li>
+                                                                        <strong>Qty: </strong>
+                                                                        ({{ $item->qty}})
+                                                                        <strong>Color: </strong>
+                                                                        {{ $item->options->color}}
+                                                                        <strong>Size: </strong>
+                                                                        {{ $item->options->size}}
+                                                                    </li>
+                                                                @endforeach
+
+                                                                <hr>
+
+                                                                <li>
+                                                                    @if ( Session::has('coupon'))
+                                                                        <strong>SubTotal: </strong> ${{ $cartTotal }} <hr>
+                                                                        <strong>Copon Name: </strong> {{ session()->get('coupon')['coupon_name'] }}
+                                                                        ( {{ session()->get('coupon')['coupon_discount'] }} %)
+                                                                        <hr>
+                                                                        <strong>Discount Amount : </strong> ${{ session()->get('coupon')['discount_amount'] }}
+                                                                        <hr>
+                                                                        <strong>GrandTotal : </strong> ${{ session()->get('coupon')['total_amount'] }}
+                                                                        <hr>
+                                                                    @else
+                                                                        <strong>SubTotal : </strong> ${{ $cartTotal }} <hr>
+                                                                        <strong>GrandTotal : </strong> ${{ $cartTotal }} <hr>
+                                                                    @endif
+
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    <!-- checkout-progress-sidebar -->
                                 </div>
-                            </div>
-                            <!-- checkout-progress-sidebar -->
-                        </div>
 
 
 
@@ -255,7 +255,7 @@ My Checkout
                             </div>
 
 
-                        </form>
+                    </form>
 
 			</div><!-- /.row -->
 		</div><!-- /.checkout-box -->
