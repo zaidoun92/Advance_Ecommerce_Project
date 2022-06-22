@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CashController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\WishlistController;
@@ -218,13 +219,25 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth','user'],'namespace' =>
         // Stripe Payment Order
         Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
 
+        // Cash Payment Order
+        Route::post('/cash/order', [CashController::class, 'CashOrder'])->name('cash.order');
+
 
         Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
 
 
         Route::get('/order_details/{order_id}', [AllUserController::class, 'OrderDetails']);
 
+
+        Route::get('/invoice_download/{order_id}', [AllUserController::class, 'InvoiceDownload']);
+
     });
+
+
+
+
+
+
 
 
     // MyCart Page Load
