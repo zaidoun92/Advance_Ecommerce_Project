@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SliderController;
@@ -270,6 +271,37 @@ Route::prefix('coupons')->group(function() {
     Route::post('/update/{id}', [CouponController::class, 'CouponUpdate'])->name('coupon.update');
     Route::get('/delete/{id}', [CouponController::class, 'CouponDelete'])->name('coupon.delete');
 });
+
+
+
+
+
+
+
+
+
+// All Admin Orders Routs
+Route::prefix('orders')->group(function() {
+    Route::get('/pending/orders', [OrderController::class, 'PendingOrders'])->name('pending.orders');
+    Route::get('pending/order/details/{order_id}', [OrderController::class, 'PendingOrdersDetails'])->name('pending.order.details');
+    Route::get('/confirmed/orders', [OrderController::class, 'ConfirmedOrders'])->name('confirmed.orders');
+    Route::get('/processing/orders', [OrderController::class, 'ProcessingOrders'])->name('processing.orders');
+    Route::get('/picked/orders', [OrderController::class, 'PickedOrders'])->name('picked.orders');
+    Route::get('/shipped/orders', [OrderController::class, 'ShippedOrders'])->name('shipped.orders');
+    Route::get('/delivered/orders', [OrderController::class, 'DeliveredOrders'])->name('delivered.orders');
+    Route::get('/cancel/orders', [OrderController::class, 'CancelOrders'])->name('cancel.orders');
+    // Update Status
+    Route::get('/pending/confirm/{order_id}', [OrderController::class, 'PendingToConfirm'])->name('pending.confirm');
+    Route::get('/confirm/Processing/{order_id}', [OrderController::class, 'ConfirmToProcessing'])->name('confirm.processing');
+    Route::get('/processing/picked/{order_id}', [OrderController::class, 'ProcessingToPicked'])->name('processing.picked');
+    Route::get('/picked/shipped/{order_id}', [OrderController::class, 'pickedToShipped'])->name('picked.shipped');
+    Route::get('/shipped/delivered/{order_id}', [OrderController::class, 'shippedToDelivered'])->name('shipped.delivered');
+    Route::get('/delivered/cancel/{order_id}', [OrderController::class, 'DeliveredToCancel'])->name('delivered.cancel');
+    Route::get('/invoice/download/{order_id}', [OrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
+});
+
+
+
 
 
 
