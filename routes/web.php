@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -232,6 +233,15 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth','user'],'namespace' =>
 
         Route::get('/invoice_download/{order_id}', [AllUserController::class, 'InvoiceDownload']);
 
+        Route::post('/return/order/{order_id}', [AllUserController::class, 'ReturnOrder'])->name('return.order');
+
+        Route::get('/return/order/list', [AllUserController::class, 'ReturnOrderList'])->name('return.order.list');
+
+        Route::get('/cancel/orders/list', [AllUserController::class, 'CancelOrdersList'])->name('cancel.orders.list');
+
+
+
+
     });
 
 
@@ -298,6 +308,22 @@ Route::prefix('orders')->group(function() {
     Route::get('/shipped/delivered/{order_id}', [OrderController::class, 'shippedToDelivered'])->name('shipped.delivered');
     Route::get('/delivered/cancel/{order_id}', [OrderController::class, 'DeliveredToCancel'])->name('delivered.cancel');
     Route::get('/invoice/download/{order_id}', [OrderController::class, 'AdminInvoiceDownload'])->name('invoice.download');
+});
+
+
+
+
+
+
+
+
+
+// All Admin Reports Routs
+Route::prefix('reports')->group(function() {
+    Route::get('/view', [ReportController::class, 'ReportView'])->name('all-reports');
+    Route::post('/search/by/date', [ReportController::class, 'ReportByDate'])->name('search-by-date');
+    Route::post('/search/by/month', [ReportController::class, 'ReportByMonth'])->name('search-by-month');
+    Route::post('/search/by/year', [ReportController::class, 'ReportByYear'])->name('search-by-year');
 });
 
 
