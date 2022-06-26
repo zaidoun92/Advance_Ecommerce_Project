@@ -332,7 +332,7 @@ Route::prefix('reports')->group(function() {
 
 // All Admin Users Routs
 Route::prefix('alluser')->group(function() {
-    Route::get('/view', [ReportController::class, 'AllUsersView'])->name('all-users');
+    Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-users');
 });
 
 
