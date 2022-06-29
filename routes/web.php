@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
@@ -333,6 +334,28 @@ Route::prefix('reports')->group(function() {
 // All Admin Users Routs
 Route::prefix('alluser')->group(function() {
     Route::get('/view', [AdminProfileController::class, 'AllUsers'])->name('all-users');
+});
+
+
+
+
+
+
+
+// All Admin Blog Routs
+Route::prefix('blog')->group(function() {
+    Route::get('/category', [BlogController::class, 'BlogCategory'])->name('blog.category');
+    Route::post('/store', [BlogController::class, 'BlogCategoryStore'])->name('blogcategory.store');
+    Route::get('/category/edit/{blog_id}', [BlogController::class, 'BlogCategoryEdit'])->name('blog.category.edit');
+    Route::post('/update/{blog_id}', [BlogController::class, 'BlogCategoryUpdate'])->name('blog.category.update');
+    Route::get('/category/delete/{blog_id}', [BlogController::class, 'BlogCategoryDelete'])->name('blog.category.delete');
+
+
+    // Admin View Blog Post
+    Route::get('/list/post', [BlogController::class, 'ListBlogPost'])->name('list.post');
+    Route::get('/add/post', [BlogController::class, 'AddBlogPost'])->name('add.post');
+    Route::post('/post/store', [BlogController::class, 'BlogPostStore'])->name('post.store');
+
 });
 
 
