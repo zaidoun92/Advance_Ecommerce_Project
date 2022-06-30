@@ -123,7 +123,7 @@ class BlogController extends Controller
 
     /////////////////////////////////////// Blog Post All Methods /////////////////////////////////////
     public function ListBlogPost(){
-        $blogpost = BlogPost::latest()->get();
+        $blogpost = BlogPost::with('category')->latest()->get();
         return view('backend.blog.post.post_list',compact('blogpost','blogpost'));
 
     }
@@ -138,7 +138,7 @@ class BlogController extends Controller
 
     public function AddBlogPost() {
         $blogcategory = BlogPostCategory::latest()->get();
-        $blogpost = BlogPost::with('postcategory')->latest()->get();
+        $blogpost = BlogPost::latest()->get();
         return view('backend.blog.post.post_add',compact('blogpost','blogcategory'));
     }
 
