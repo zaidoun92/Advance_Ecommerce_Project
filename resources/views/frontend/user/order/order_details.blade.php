@@ -192,8 +192,6 @@
 
             @if ($order->status !== "delivered")
 
-
-
             @else
 
             @php
