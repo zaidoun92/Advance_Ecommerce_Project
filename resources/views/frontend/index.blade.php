@@ -1108,8 +1108,8 @@ Home Easy Online Shop
 
                         <div class="blog-post-info text-left">
                             <h3 class="name"><a href="#">@if (session()->get('language') == 'arabic') {{ $blog->post_title_ar }} @else {{ $blog->post_title_en }} @endif</a></h3>
-                            <span class="info">By Jone Doe &nbsp;|&nbsp; {{ Carbon\Carbon::parse($blog->created_at)->diffForhumans()}}</span>
-                            <p class="text">@if (session()->get('language') == 'arabic') {!! Str::limit($blog->post_details_ar, 200, '...') !!} @else {!! Str::limit($blog->post_details_en, 200, '...') !!} @endif</p>
+                            <span class="info">{{ Carbon\Carbon::parse($blog->created_at)->diffForhumans()}}</span>
+                            <p class="text">@if (session()->get('language') == 'arabic') {!! Str::limit($blog->post_details_ar, 100, '...') !!} @else {!! Str::limit($blog->post_details_en, 100, '...') !!} @endif</p>
                             <a href="{{ route('post.details',$blog->id) }}" class="lnk btn btn-primary">Read more</a> </div>
                         <!-- /.blog-post-info -->
 
