@@ -205,7 +205,7 @@
                             <textarea name="return_reason" id="" class="form-control" cols="30" rows="05">Return Reason</textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-danger">Submit</button>
+                        <button type="submit" class="btn btn-danger">Order Return</button>
                     </form>
                 @else
                     <span class="badge badge-pill badge-warning" style="background: red">You Have send return for this product</span>
