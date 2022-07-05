@@ -174,6 +174,23 @@
 
 
 
+            <li class="treeview {{ ($prefix == '/review')? 'active':'' }}">
+                <a href="#">
+                <i data-feather="file"></i>
+                <span>Mange Review</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-right pull-right"></i>
+                </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ ($route == 'pending.review') ? 'active':'' }}"><a href="{{ route('pending.review')}}"><i class="ti-more"></i>Pending Review</a></li>
+                    <li class="{{ ($route == 'publish.review') ? 'active':'' }}"><a href="{{ route('publish.review')}}"><i class="ti-more"></i>publish Review</a></li>
+                </ul>
+            </li>
+
+
+
+
         <li class="header nav-small-cap">User Interface</li>
 
         <li class="treeview {{ ($prefix == '/orders')? 'active':'' }}">

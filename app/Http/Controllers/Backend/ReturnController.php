@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class ReturnController extends Controller
 {
     public function RetuenRequest() {
-
         $orders = Order::where('return_order',1)->orderBy('id','DESC')->get();
         return view('backend.return_order.return_request',compact('orders'));
     }

@@ -35,15 +35,18 @@
 	<span class="date-time">{{ Carbon\Carbon::parse($blogpost->created_at)->diffForhumans()}}</span>
 	<p>@if (session()->get('language') == 'arabic') {!! $blogpost->post_details_ar !!} @else {!! $blogpost->post_details_en !!} @endif</p>
 
-	<div class="social-media">
-		<span>share post:</span>
-		<a href="#"><i class="fa fa-facebook"></i></a>
-		<a href="#"><i class="fa fa-twitter"></i></a>
-		<a href="#"><i class="fa fa-linkedin"></i></a>
-		<a href=""><i class="fa fa-rss"></i></a>
-		<a href="" class="hidden-xs"><i class="fa fa-pinterest"></i></a>
-	</div>
+
+
+	<!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <div class="addthis_inline_share_toolbox"></div>
+
+
 </div>
+
+
+
+
+
 
 
 
@@ -152,6 +155,14 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62c29a23277ec357"></script>
 
 
 
