@@ -419,6 +419,19 @@ Route::prefix('review')->group(function() {
 
 
 
+
+
+// Admin product stock  Route
+Route::prefix('stock')->group(function() {
+    Route::get('/product', [ProductController::class, 'ProductStock'])->name('product.stock');
+});
+
+
+
+
+
+
+
 // Frontend Blog Show Routes
 Route::get('/blog', [HomeBlogController::class, 'AddBlogPost'])->name('home.blog');
 Route::get('/post/details/{id}', [HomeBlogController::class, 'DetailsBlogPost'])->name('post.details');

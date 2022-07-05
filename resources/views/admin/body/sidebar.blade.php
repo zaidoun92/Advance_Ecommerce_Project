@@ -214,6 +214,27 @@
 
 
 
+
+
+
+        <li class="treeview {{ ($prefix == '/stock')? 'active':'' }}">
+            <a href="#">
+            <i data-feather="file"></i>
+            <span>Manage Stock</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="{{ ($route == 'product.stock') ? 'active':'' }}"><a href="{{ route('product.stock')}}"><i class="ti-more"></i>Product Stock</a></li>
+        </li>
+
+
+
+
+
+
+
 		<li class="treeview {{ ($prefix == '/reports')? 'active':'' }}">
             <a href="#">
             <i data-feather="file"></i>
@@ -225,6 +246,9 @@
             <ul class="treeview-menu">
                 <li class="{{ ($route == 'all-reports') ? 'active':'' }}"><a href="{{ route('all-reports')}}"><i class="ti-more"></i>All reports</a></li>
         </li>
+
+
+
 
 
 
