@@ -227,6 +227,7 @@
             </a>
             <ul class="treeview-menu">
                 <li class="{{ ($route == 'product.stock') ? 'active':'' }}"><a href="{{ route('product.stock')}}"><i class="ti-more"></i>Product Stock</a></li>
+            </ul>
         </li>
 
 
@@ -245,6 +246,7 @@
             </a>
             <ul class="treeview-menu">
                 <li class="{{ ($route == 'all-reports') ? 'active':'' }}"><a href="{{ route('all-reports')}}"><i class="ti-more"></i>All reports</a></li>
+            </ul>
         </li>
 
 
@@ -262,11 +264,25 @@
             </a>
             <ul class="treeview-menu">
                 <li class="{{ ($route == 'all-users') ? 'active':'' }}"><a href="{{ route('all-users')}}"><i class="ti-more"></i>All Users</a></li>
+            </ul>
         </li>
 
 
 
-      </ul>
+        <li class="treeview {{ ($prefix == '/adminuserrole')? 'active':'' }}">
+            <a href="#">
+            <i data-feather="file"></i>
+            <span>Admin User Role</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-right pull-right"></i>
+            </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="{{ ($route == 'all.admin.user') ? 'active':'' }}"><a href="{{ route('all.admin.user')}}"><i class="ti-more"></i>All Admin User</a></li>
+            </ul>
+        </li>
+
+
     </section>
 
 	<div class="sidebar-footer">
