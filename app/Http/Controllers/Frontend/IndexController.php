@@ -10,6 +10,7 @@ use App\Models\MultiImage;
 use App\Models\Products;
 use App\Models\Slider;
 use App\Models\SubCategory;
+use App\Models\SubSubCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -196,9 +197,10 @@ class IndexController extends Controller
     public function SubCatWiseProduct($subcat_id,$slug) {
         $products = Products::where('status', 1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(6);
         $catgories = Category::orderBy('category_name_en','ASC')->get();
+        $breadsubcat = SubCategory::with(['category'])->where('id',$subcat_id)->get();
 
 
-        return view('frontend.product.subcategory_view', compact('products','catgories'));
+        return view('frontend.product.subcategory_view', compact('products','catgories','breadsubcat'));
     }
 
 
@@ -210,7 +212,10 @@ class IndexController extends Controller
     public function SubSubCatWiseProduct($subsubcat_id,$slug) {
         $products = Products::where('status', 1)->where('subsubcategory_id',$subsubcat_id)->orderBy('id','DESC')->paginate(6);
         $catgories = Category::orderBy('category_name_en','ASC')->get();
-        return view('frontend.product.subsubcategory_view', compact('products','catgories'));
+        $breadsubsubcat = SubSubCategory::with(['category','subcategory'])->where('id',$subsubcat_id)->get();
+
+
+        return view('frontend.product.subsubcategory_view', compact('products','catgories','breadsubsubcat'));
     }
 
 
@@ -237,5 +242,27 @@ class IndexController extends Controller
             'color' => $product_color,
             'size' => $product_size,
         ));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function ProductSearch(Request $request) {
+
+        $item = $request->search;
+
+        $catgories = Category::orderBy('category_name_en','ASC')->get();
+        $products = Products::where('product_name_en','LIKE',"%$item%")->get();
+
+        return view('frontend.product.search',compact('products','catgories'));
     }
 }

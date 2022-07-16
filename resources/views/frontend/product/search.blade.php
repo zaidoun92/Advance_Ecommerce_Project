@@ -5,7 +5,7 @@
 
 
 @section('title')
-Sub - SubCategory Product
+Product Search Page
 @endsection
 
 
@@ -16,20 +16,7 @@ Sub - SubCategory Product
       <div class="breadcrumb-inner">
         <ul class="list-inline list-unstyled">
           <li><a href="#">Home</a></li>
-          <li class='active'>
-            @foreach ($breadsubsubcat as $item)
-                <li class='active'>{{ $item->category->category_name_en }}</li>
-            @endforeach
-
-            @foreach ($breadsubsubcat as $item)
-                <li class='active'>{{ $item->subcategory->subcategory_name_en }}</li>
-            @endforeach
-
-            @foreach ($breadsubsubcat as $item)
-                <li class='active'>{{ $item->subsubcategory_name_en }}</li>
-            @endforeach
-
-          </li>
+          <li class='active'>Handbags</li>
         </ul>
       </div>
       <!-- /.breadcrumb-inner -->
@@ -220,19 +207,7 @@ Sub - SubCategory Product
             </div>
           </div>
 
-
-            @foreach ($breadsubsubcat as $item)
-                <span class="badge badge-danger" style="background-color: #808080">{{ $item->category->category_name_en }}</span>
-            @endforeach
-            /
-            @foreach ($breadsubsubcat as $item)
-                <span class="badge badge-danger" style="background-color: #808080">{{ $item->subcategory->subcategory_name_en  }}</span>
-            @endforeach
-            /
-            @foreach ($breadsubsubcat as $item)
-                <span class="badge badge-danger" style="background-color: #FF0000">{{ $item->subcategory->subcategory_name_en  }}</span>
-            @endforeach
-
+            <h4><b>Total Search</b> <span class="badge badge-danger" style="background: #FF0000"> {{ count($products) }}</span> Items </h4>
 
           <div class="clearfix filters-container m-t-10">
             <div class="row">
@@ -481,7 +456,6 @@ Sub - SubCategory Product
                 <div class="pagination-container">
                   <ul class="list-inline list-unstyled">
 
-                    {{ $products->links() }}
 
                   </ul>
                   <!-- /.list-inline -->

@@ -541,6 +541,11 @@ Route::post('/user/password/store', [IndexController::class, 'UserPasswordUpdate
 
 
 
+// Product Search
+Route::post('/search', [IndexController::class, 'ProductSearch'])->name('product.search');
+
+
+
 
 
 
