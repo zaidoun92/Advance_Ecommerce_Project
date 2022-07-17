@@ -34,12 +34,22 @@
 	<form method="POST" action="{{ isset($guard) ? url($guard.'/login') : route('login') }}" class="register-form outer-top-xs" role="form">
         @csrf
 		<div class="form-group">
-		    <label class="info-title" for="exampleInputEmail1">Email Address <span>*</span></label>
-		    <input id="email" type="email" name="email" :value="old('email')" required autofocus class="form-control unicase-form-control text-input">
+		    <label class="info-title" for="exampleInputEmail1">User Name <span>*</span></label>
+		    <input type="text" id="name" name="name" class="form-control unicase-form-control text-input">
+            @error('name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message}}</strong>
+                </span>
+            @enderror
 		</div>
 	  	<div class="form-group">
 		    <label class="info-title" for="exampleInputPassword1">Password <span>*</span></label>
 		    <input id="password" type="password" name="password" required autocomplete="current-password" class="form-control unicase-form-control text-input" >
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message}}</strong>
+                </span>
+            @enderror
 		</div>
 		<div class="radio outer-xs">
 		  	<label>
@@ -65,8 +75,8 @@
         @csrf
 		<div class="form-group">
 	    	<label class="info-title" for="exampleInputEmail2">Name <span>*</span></label>
-	    	<input id="name" type="text" name="name" :value="old('name')" autofocus autocomplete="name" class="form-control unicase-form-control text-input">
-            @error('name')
+	    	<input id="name" type="text" name="regname" :value="old('name')" autofocus autocomplete="name" class="form-control unicase-form-control text-input">
+            @error('regname')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message}}</strong>
                 </span>

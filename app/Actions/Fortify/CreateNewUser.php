@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
@@ -21,7 +22,7 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'regname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'string', 'max:255'],
             'password' => $this->passwordRules(),
@@ -29,10 +30,17 @@ class CreateNewUser implements CreatesNewUsers
         ])->validate();
 
         return User::create([
-            'name' => $input['name'],
+            'name' => $input['regname'],
             'email' => $input['email'],
             'phone' => $input['phone'],
             'password' => Hash::make($input['password']),
         ]);
+
+        $notification = array(
+            'message' => 'User Created Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('dashboard')->with($notification);
     }
 }
