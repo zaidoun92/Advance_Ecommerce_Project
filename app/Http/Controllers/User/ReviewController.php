@@ -24,6 +24,7 @@ class ReviewController extends Controller
             'user_id'    => Auth::id(),
             'comment'    => $request->comment,
             'summary'    => $request->summary,
+            'rating'    => $request->quality,
             'created_at' => Carbon::now(),
         ]);
 
