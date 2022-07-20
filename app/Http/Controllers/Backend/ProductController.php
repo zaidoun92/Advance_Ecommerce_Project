@@ -27,14 +27,14 @@ class ProductController extends Controller
 
     public function StoreProduct(Request $request){
 
-        // $request->validate([
-        //     'file' => 'required|mimes:jpeg,png,jpg,zip,pdf|max:2048',
-        // ]);
-        // if ($files = $request->file('file')) {
-        //     $destinationPath = 'upload/pdf'; // upload path
-        //     $digitalItem = date('YmdHis') . "." . $files->getClientOriginalExtension();
-        //     $files->move($destinationPath,$digitalItem);
-        // }
+        $request->validate([
+            'file' => 'required|mimes:jpeg,png,jpg,zip,pdf|max:2048',
+        ]);
+        if ($files = $request->file('file')) {
+            $destinationPath = 'upload/pdf'; // upload path
+            $digitalItem = date('YmdHis') . "." . $files->getClientOriginalExtension();
+            $files->move($destinationPath,$digitalItem);
+        }
 
         $image = $request->file('product_thambnail');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
@@ -74,6 +74,7 @@ class ProductController extends Controller
             'special_deals' => $request->special_deals,
 
             'product_thambnail' => $save_url,
+            'digital_file' => $digitalItem,
             'status' => 1,
             'created_at' => Carbon::now(),
         ]);

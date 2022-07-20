@@ -315,8 +315,8 @@
                         <fieldset>
                             <input type="checkbox" id="checkbox_2" name="hot_deals" value="1">
                             <label for="checkbox_2">Hot Deals</label>
-                            </fieldset>
-                            <fieldset>
+                        </fieldset>
+                        <fieldset>
                             <input type="checkbox" id="checkbox_3" name="featured" value="1">
                             <label for="checkbox_3">Featured</label>
                         </fieldset>
@@ -329,13 +329,25 @@
                         <fieldset>
                             <input type="checkbox" id="checkbox_4" name="special_offer" value="1">
                             <label for="checkbox_4">Special Offer</label>
-                            </fieldset>
-                            <fieldset>
+                        </fieldset>
+                        <fieldset>
                             <input type="checkbox" id="checkbox_5" name="special_deals" value="1">
                             <label for="checkbox_5">Special Deals</label>
                         </fieldset>
-                        </div>
                     </div>
+                </div>
+            </div> <!-- end col md 6 -->
+        </div> <!-- end row -->
+
+
+
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <h5>Digital Product<span class="text-danger">pdf,xlx,csv*</span></h5>
+                <div class="controls">
+                    <input type="file" name="file" class="form-control">
+
                 </div>
             </div>
         </div> <!-- end col md 4 -->
